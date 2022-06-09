@@ -1,30 +1,38 @@
 package testy;
 
 import Pages.HomePage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static io.qameta.allure.Allure.step;
+
+
+@Owner("Piotr Krzosa")
+@Epic("Nazwa epica")
+@Story("Nazwa story")
 public class HomePageTests extends BaseTest {
+
     @Test(groups = {"SmokeTests"})
+    @Severity(SeverityLevel.BLOCKER)
+    @TmsLink("http://google.com")
     public void checkHomePageTitle(){
         driver.get("http://sampleshop.inqa.pl/");
         String actualTitle = driver.getTitle();
-
         Assert.assertEquals(actualTitle, "Automation Sample Shop");
     }
 
-    @Test
+    @Test(groups = {"SmokeTests"})
+    @Severity(SeverityLevel.MINOR)
+    @TmsLink("http://google.com")
     public void checkProductPrice(){
         HomePage homePage = new HomePage(driver);
 //        tworzymy instancję obiektu strony
-
         homePage.openHomePage();
 //        otwieramy stronę (przechodzimy do odpowiedniego URL)
         String actualPrice = homePage.getPriceOfFirstElement();
 //        Odwołując się do metody tej strony pobieramy cenę
-        Assert.assertEquals("10", actualPrice);
+        Assert.assertEquals( actualPrice, "23,52 zł");
     }
 
 //    @Test

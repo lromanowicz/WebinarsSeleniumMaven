@@ -12,6 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <testng.version>7.5</testng.version>
+        <aspectj.version>1.8.10</aspectj.version>
         <selenium.version>3.141.59</selenium.version>
 <!--        Możemy uporządkować zarządzanie wersjami tak by były uporządkowane w jenym miejscu z wykorzystaniem
             znaczników podobnych do zmiennych. Poprawia to czytelność i ułatwia utrzymanie -->
@@ -59,8 +60,11 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.2.0</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.18.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -69,7 +73,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M6</version>
+                    <version>3.0.0-M5</version>
                     <configuration>
 <!--                        <groups>SmokeTests</groups>-->
 <!--                        możliwość uruchamiania określonych grup testów (zdefiniowanych w @Test)-->
@@ -81,7 +85,17 @@
                                 System.getProperty-->
                         </systemPropertyVariables>
 
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        </argLine>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>

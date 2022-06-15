@@ -45,7 +45,7 @@ public class DriverProvider {
             caps.setCapability("browserName", "chrome");
 
             try {
-                driver = new RemoteWebDriver(new URL("http://192.168.1.23:58978"), caps);
+                driver = new RemoteWebDriver(new URL("http://192.168.1.23:4444"), caps);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
@@ -54,7 +54,7 @@ public class DriverProvider {
             caps.setCapability("browserName", "firefox");
 
             try {
-                driver = new RemoteWebDriver(new URL("http://192.168.1.23:58978"), caps);
+                driver = new RemoteWebDriver(new URL("http://192.168.1.23:4444"), caps);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
